@@ -9,16 +9,16 @@ class AuthorController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "POST"]
 
     def index() {
-        List<Author> list = authorService.findAll()
+         List<Author> list = authorService.findAll()
         [amountOfAuthors:authorService.amountOfAuthors(),
             youngestAuthor:authorService.getTheYoungestAuthor(list),
                 oldestAuthor:authorService.getTheOldestAuthor(list),
                     allAuthors:list,
                         findAuthorById: authorService.findAll()
-//                    bestSellingAuthor:authorService.getTheBestSellingAuthor(list)
+//                    bestSellingAuthor:authorService.getTheBestSellingAuthor(list),
 //                        leastSellingAuthor:authorService.getTheLeastSellingAuthor(list),
 //                            efficientAuthor:authorService.getTheMostEfficientAuthor(list)
-
+//
         ]
     }
 
@@ -27,18 +27,20 @@ class AuthorController {
 
     }
 
+// saving new author
     def save(){
         def author = new Author(params)
         author.save(failOnError: true)
         redirect (action: 'index')
     }
 
-// editing author
+// find author to edit
     def edit(Long id) {
         def author = Author.get(id)
         [authorAuthor: author]
     }
 
+// edit current author
     def editAuthor(){
         def author = Author.get(params.id)
         author.properties = params
@@ -56,7 +58,7 @@ class AuthorController {
         }
     }
 
-// ajax call for render fields of author
+// ajax call for render fields of current author
     def ajax(){
         def authorJSON = Author.get(request.JSON.id)
         def result = [authorKey: authorJSON]

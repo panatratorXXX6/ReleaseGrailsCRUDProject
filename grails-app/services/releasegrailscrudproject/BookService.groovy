@@ -15,7 +15,4 @@ class BookService {
         bookService.save(book)
     }
 
-    def createJSON(){
-    }
-
 }
