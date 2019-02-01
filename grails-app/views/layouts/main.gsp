@@ -8,7 +8,6 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
-
     <asset:stylesheet src="application.css"/>
 
     <g:layoutHead/>
@@ -44,7 +43,6 @@
         <strong class="centered"><a href="https://grails-slack.cfapps.io" target="_blank"></a></strong>
     </div>
 </div>
-
 
 <div id="spinner" class="spinner" style="display:none;">
     <g:message code="spinner.alt" default="Loading&hellip;"/>

@@ -10,16 +10,19 @@ class AuthorController {
 
     def index() {
          List<Author> list = authorService.findAll()
-        [amountOfAuthors:authorService.amountOfAuthors(),
-            youngestAuthor:authorService.getTheYoungestAuthor(list),
-                oldestAuthor:authorService.getTheOldestAuthor(list),
-                    allAuthors:list,
-                        findAuthorById: authorService.findAll()
-//                    bestSellingAuthor:authorService.getTheBestSellingAuthor(list),
-//                        leastSellingAuthor:authorService.getTheLeastSellingAuthor(list),
-//                            efficientAuthor:authorService.getTheMostEfficientAuthor(list)
-//
-        ]
+         if (list.size() == 0){
+             redirect(action: "create")
+         } else {
+             [amountOfAuthors: authorService.amountOfAuthors(),
+              youngestAuthor : authorService.getTheYoungestAuthor(list),
+              oldestAuthor   : authorService.getTheOldestAuthor(list),
+              allAuthors     : list,
+              findAuthorById : authorService.findAll(),
+              bestSellingAuthor:authorService.getTheBestSellingAuthor(list),
+              leastSellingAuthor:authorService.getTheLeastSellingAuthor(list),
+              efficientAuthor:authorService.getTheMostEfficientAuthor(list)
+             ]
+         }
     }
 
 // creating author

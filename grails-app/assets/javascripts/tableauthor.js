@@ -15,7 +15,7 @@ function deleteAuthor(id) {
     }
 }
 
-function increase(){
+function changeColour(){
     $("#table").css("background-color", "grey")
     $("#undoId").attr("type", "submit")
     $("#increaseA").attr("type", "hidden")

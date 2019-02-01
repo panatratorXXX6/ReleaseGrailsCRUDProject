@@ -1,8 +1,6 @@
 package releasegrailscrudproject
 
 import grails.plugins.redis.RedisService
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 
 class BookController {
 
@@ -21,11 +19,8 @@ class BookController {
 // create new book
     def create(){
         respond new Book(params)
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS")
-        Date date = new Date()
-        String strDate = dateFormat.format(date)
-        //JSONObject myString = new JSONObject().put("Book", ["object":"Book", "name":"Name", "action":"Create"])
-        String myString =
+        String strDate = bookService.getDateFormat()
+            String myString = "New book was Created"
         redisService.hset("book:one", strDate.toString(), myString.toString())
     }
 
@@ -33,7 +28,7 @@ class BookController {
     def save(){
         def book = new Book(params)
         book.save(failOnError: true)
-        String strDate = bookService.addRecordInRedisDB()
+        String strDate = bookService.getDateFormat()
         String myString = "Book with name " + book.name + " was Saved"
         redisService.hset("book:one", strDate.toString(), myString.toString())
         redirect (action: 'index')
@@ -51,10 +46,7 @@ class BookController {
         book.properties = params
         book.save(flush: true)
         redirect(action: 'index')
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS")
-        Date date = new Date()
-        String strDate = dateFormat.format(date)
-        //JSON myString = new JSONObject().put("Book", ["object":"Book", "name":book.name.toString(), "action":"Edit"])
+        String strDate = bookService.getDateFormat()
         String myString = "Book with name " + book.name + " was Edited"
         redisService.hset("book:one", strDate.toString(), myString.toString())
     }
@@ -62,13 +54,10 @@ class BookController {
 // delete current book
     def delete(Long id){
         if (id == null) {
-            print("It's null, nerd !")
+            redirect(action: create())
         } else {
             def book = Book.get(params.id)
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS")
-            Date date = new Date()
-            String strDate = dateFormat.format(date)
-            //JSON myString = new JSONObject().put("Book", ["object":"Book", "name":book.name.toString(), "action":"Delete"])
+            String strDate = bookService.getDateFormat()
             String myString = "Book with name " + book.name + " was Deleted"
             redisService.hset("book:one", strDate.toString(), myString.toString())
             Book.get(id).delete(flush: true)

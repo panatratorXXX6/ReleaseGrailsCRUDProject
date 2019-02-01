@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<input type="submit" id="increaseA" value="Increase" onclick="increase()" />
+<input type="submit" id="increaseA" value="Change colour" onclick="changeColour()" />
 <input type="hidden" id="undoId" value="Undo" onclick="undo()" />
 
 <a href="#list-author" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -28,7 +28,6 @@
     <input type="hidden" value="" name="id" id="five">
 </g:form>
 
-
     <fieldset>
         <div>
             <br>
@@ -36,9 +35,9 @@
             <p>Amount of authors: ${amountOfAuthors}</p>
             <p>The youngest author: ${youngestAuthor.name}</p>
             <p>The oldest author: ${oldestAuthor.name}</p>
-            %{--<p>The best-selling author: ${bestSellingAuthor.name}</p>--}%
-            %{--<p>The least-selling author: ${}</p>--}%
-            %{--<p>The most efficient author: ${}</p>--}%
+            <p>The best-selling author: ${bestSellingAuthor.name}</p>
+            <p>The least-selling author: ${leastSellingAuthor.name}</p>
+            <p>The most efficient author: ${efficientAuthor.name}</p>
         </div>
 
         <div id="dialog">

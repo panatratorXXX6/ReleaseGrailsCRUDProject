@@ -9,4 +9,8 @@ class LoggsController {
     def index() {
         [log:redisService.hgetAll("book:one")]
     }
+
+    def delete(){
+        redisService.flushDB()
+    }
 }
