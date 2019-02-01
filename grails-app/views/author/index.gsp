@@ -10,7 +10,6 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <asset:javascript src="tableauthor.js" />
     <asset:javascript src="authorajax.js" />
-
 </head>
 <body>
 
